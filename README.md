@@ -16,7 +16,8 @@ AWS CLI: Used for authentication with AWS services.
 Flask: A Python web framework for running the backend server.
 Boto3: AWS SDK for Python to interact with AWS S3.
 
-![Cloud Storage Logo](Screenshots\Front End.png)
+## FRONT END OUTPUT
+![Front End](D:\Screenshots\Front End.png)
 
 ## Setup
 1. Clone the Repository
