@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud File Storage</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+        }
+        input, button {
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Cloud File Storage</h1>
+        <h3>Upload File</h3>
+        <form id="uploadForm">
+            <input type="file" id="fileInput" required>
+            <select id="cloudProvider">
+                <option value="aws">AWS</option>
+                <option value="gcp">Google Cloud</option>
+            </select>
+            <button type="submit">Upload</button>
+        </form>
+
+        <h3>Download File</h3>
+        <form id="downloadForm">
+            <input type="text" id="downloadFilename" placeholder="Enter filename" required>
+            <select id="downloadCloudProvider">
+                <option value="aws">AWS</option>
+                <option value="gcp">Google Cloud</option>
+            </select>
+            <button type="submit">Download</button>
+        </form>
+
+        <h3>Delete File</h3>
+        <form id="deleteForm">
+            <input type="text" id="deleteFilename" placeholder="Enter filename" required>
+            <select id="deleteCloudProvider">
+                <option value="aws">AWS</option>
+                <option value="gcp">Google Cloud</option>
+            </select>
+            <button type="submit">Delete</button>
+        </form>
+    </div>
+    <script>
+        const baseURL = 'http://127.0.0.1:5000';
+
+        document.getElementById('uploadForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const file = document.getElementById('fileInput').files[0];
+            const cloudProvider = document.getElementById('cloudProvider').value;
+
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('cloud_provider', cloudProvider);
+
+            const response = await fetch(`${baseURL}/upload`, {
+                method: 'POST',
+                body: formData
+            });
+            const data = await response.json();
+            alert(data.message || data.error);
+        });
+
+        document.getElementById('downloadForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const filename = document.getElementById('downloadFilename').value;
+            const cloudProvider = document.getElementById('downloadCloudProvider').value;
+
+            const response = await fetch(`${baseURL}/download/${filename}?cloud_provider=${cloudProvider}`);
+            if (response.ok) {
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = filename;
+                a.click();
+                window.URL.revokeObjectURL(url);
+            } else {
+                alert("Error downloading file");
+            }
+        });
+
+        document.getElementById('deleteForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const filename = document.getElementById('deleteFilename').value;
+            const cloudProvider = document.getElementById('deleteCloudProvider').value;
+
+            const response = await fetch(`${baseURL}/delete/${filename}?cloud_provider=${cloudProvider}`, {
+                method: 'DELETE'
+            });
+            const data = await response.json();
+            alert(data.message || data.error);
+        });
+    </script>
+</body>
+</html>
