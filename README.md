@@ -1,14 +1,14 @@
-##MINI PROJECT IN CLOUD COMPUTING
+## MINI PROJECT IN CLOUD COMPUTING
 Cloud-Based File Storage
 This project implements a simple cloud-based file storage system that allows users to upload, download, and delete files using AWS S3. The backend is developed using Flask (Python), and the frontend provides an easy-to-use interface for interacting with the system.
 
-##Features
+## Features
 Upload Files: Users can upload files to a cloud storage system (AWS S3).
 Download Files: Users can retrieve previously uploaded files.
 Delete Files: Users can delete files from the cloud storage.
 Prerequisites
 Before setting up the project, ensure you have the following:
-##AWS
+## AWS
 AWS Account: You will need an AWS account to use S3 for file storage.
 AWS S3 Bucket: You must create an S3 bucket in your AWS account to store the files.
 Python 3.x: The backend is developed in Python 3.
@@ -16,7 +16,7 @@ AWS CLI: Used for authentication with AWS services.
 Flask: A Python web framework for running the backend server.
 Boto3: AWS SDK for Python to interact with AWS S3.
 
-##Setup
+## Setup
 1. Clone the Repository
 Begin by cloning this repository to your local machine.
 
