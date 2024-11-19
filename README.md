@@ -15,6 +15,7 @@ Python 3.x: The backend is developed in Python 3.
 AWS CLI: Used for authentication with AWS services.
 Flask: A Python web framework for running the backend server.
 Boto3: AWS SDK for Python to interact with AWS S3.
+![Front End of mini project](D:\Screenshots\Screenshot 2024-11-19 161130.png)
 
 Setup
 1. Clone the Repository
